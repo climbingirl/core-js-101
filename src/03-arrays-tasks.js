@@ -84,7 +84,7 @@ function getArrayOfPositives(arr) {
  *    [ 'cat, 'dog', 'raccoon' ] => [ 'cat', 'dog', 'raccoon' ]
  */
 function getArrayOfStrings(arr) {
-  return arr.filter((it) => typeof it === 'string');
+  return arr.filter((el) => typeof el === 'string');
 }
 
 /**
@@ -101,7 +101,7 @@ function getArrayOfStrings(arr) {
  *    [ false, 0, NaN, '', undefined ]   => [ ]
  */
 function removeFalsyValues(arr) {
-  return arr.filter((el) => el);
+  return arr.filter((el) => Boolean(el));
 }
 
 /**
@@ -305,7 +305,7 @@ function get3TopItems(arr) {
  *   [ 1, '2' ] => 1
  */
 function getPositivesCount(arr) {
-  const res = arr.reduce((sum, el) => sum + ((typeof el === 'number' && el > 0) ? 1 : 0), 0);
+  const res = arr.filter((el) => typeof el === 'number' && el > 0).length;
   return res;
 }
 
@@ -463,7 +463,11 @@ function getIdentityMatrix(n) {
  *     3, 3   => [ 3 ]
  */
 function getIntervalArray(start, end) {
-  return (start < end ? [start, ...getIntervalArray(start + 1, end)] : [start]);
+  const length = end - start + 1;
+  const res = new Array(length).fill(0)
+    .map((num, i) => start + i);
+
+  return res;
 }
 
 /**
